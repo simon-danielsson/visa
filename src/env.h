@@ -1,13 +1,12 @@
 
 // libraries
-#define ANALIB_IMPLEMENTATION
 #include "./libs/ana.h"
 
 // standard libraries
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 // diagnostics
 #pragma GCC diagnostic ignored "-Wunused-variable"
@@ -32,4 +31,3 @@
 #ifndef ENV_REPO // link to git repo
 #define ENV_REPO "UNDEFINED"
 #endif
-

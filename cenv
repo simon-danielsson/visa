@@ -99,7 +99,9 @@ build_debug() {
     APP_VERSION="$VERSION" ./nob "$root/src" "${c_flags[@]}" || return 1
     bin_name="$project_name-$VERSION-debug-$git_head_hash_short"
     mv main "$debug_dir/$bin_name" || return 1
-    "$debug_dir/$bin_name"
+    cd $root
+    rm -rf gen
+    "$debug_dir/$bin_name" -s test.txt -d gen -o
 }
 
 test_dir="$root/build/test"; mkdir -p $test_dir

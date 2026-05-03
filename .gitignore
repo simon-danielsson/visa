@@ -1,8 +1,12 @@
 build.sh
-/tools/cdok/gen
-/tools/cdok/gen/*
-/tools/nob/nob
-nvim.log
 /build
-/build/*
+/tools/cdok/gen
+/gen
+test.txt
+/images
+/tools/cdok/gen/*
+/gen/*
+/tools/nob/nob
+/tools/nob/main.dSYM/
+nvim.log
 .DS_Store
