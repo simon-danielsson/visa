@@ -1,4 +1,4 @@
-<h2 align="center">visa</h2>
+<h1 align="center">visa</h1>
   
 <p align="center">
     <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT License" />
@@ -48,9 +48,10 @@ cenv release
 ## Usage
   
 ``` terminal
-visa -s <source file(s)> -d <dest path> -o [open directly in browser]
+visa -s <config file> -d <dest path> -o [open directly in browser]
 
-The destination path is where the generated html files will be placed.
+The destination path is where the generated html files will be placed and any
+static files defined in the config file will be copied to.
 
 example:
 cd ./my_project
