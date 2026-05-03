@@ -61,7 +61,12 @@ visa -s my_presentation.txt -d ./presentation -o
   
 **Example config file.** You can choose any file extension you like for the
 config file - my own preference is .txt. The syntax and workflow is explained
-within the example itself.
+within the example itself. The document is parsed top-down, meaning that the
+first slide is on top and the last is at the bottom.  
+  
+Blocks:  
+- o {}: options  
+- s {}: slide  
   
 ``` txt
 o {
