@@ -101,7 +101,8 @@ build_debug() {
     mv main "$debug_dir/$bin_name" || return 1
     cd $root
     rm -rf gen
-    "$debug_dir/$bin_name" -s test.txt -d gen -o
+    "$debug_dir/$bin_name" -s test.txt -d gen
+    open -a "Min" ./gen/0.html
 }
 
 test_dir="$root/build/test"; mkdir -p $test_dir
