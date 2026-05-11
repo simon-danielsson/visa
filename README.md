@@ -7,7 +7,7 @@
   
 <p align="center">
   <a href="#info">Info</a> •
-  <a href="#install">Usage</a> •
+  <a href="#install">Install</a> •
   <a href="#usage">Usage</a> •
   <a href="#license">License</a>
 </p>  
@@ -17,14 +17,24 @@
 
 ## Info
   
-visa generates html slide presentations from text and image files. The generated
-html presentation can then be browsed using left and right arrow keys.
+visa generates html slide presentations from a single text file which can then be viewed in the browser, using left and right arrow keys for navigation.  
+  
+### Features
++ Image support  
++ Plain-text presentation writing  
++ Browser-based slideshow navigation  
++ Static HTML output  
++ Readable syntax  
+  
+### Why does this exist?  
++ Since this program only outputs raw html, its presentations are extremely portable between computers. The only software needed to run a presentation is a web-browser, which all computers have.
++ Writing presentations in visa is quicker than traditional presentation software.
++ The benefit of running presentations in the browser is that you can make use of
+  the browsers built-in features for quite a few things, such as zoom-in/out,
+  fullscreen and fonts.
   
 > [!IMPORTANT]  
-> 1. Only support for unix systems.
-> 2. Since visa is heavily opinionated and built for my own specific workflow, I can't
-> guarantee that this will function properly on your machine (or be enjoyable
-> to use.)
+> Only support for unix systems.
   
 visa relies on [nob.h](https://github.com/tsoding/nob.h) (a header-only
 build-system) for compilation.  
@@ -48,21 +58,24 @@ cenv release
 ## Usage
   
 ``` terminal
-visa -s <config file> -d <dest path> -o [open directly in browser]
+visa -s <presentation file> -d <dest path> -o [open directly in browser]
 
 The destination path is where the generated html files will be placed and any
-static files defined in the config file will be copied to.
+static files defined in the presentation file will be copied to.
 
 example:
 cd ./my_project
 mkdir -p presentation
-visa -s my_presentation.txt -d ./presentation -o
+visa -s presentation.txt -d ./presentation -o
 ```
   
-**Example config file.** You can choose any file extension you like for the
-config file - my own preference is .txt. The syntax and workflow is explained
+**Example presentation file.** You can choose any file extension you like for the
+presentation file - my own preference is .txt. The syntax and workflow is explained
 within the example itself. The document is parsed top-down, meaning that the
 first slide is on top and the last is at the bottom.  
+  
+The following example file covers all of this programs functionality, what you
+see is what you get!  
   
 Blocks:  
 - o {}: options  
