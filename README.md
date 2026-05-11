@@ -58,10 +58,10 @@ cenv release
 ## Usage
   
 ``` terminal
-visa -s <presentation file> -d <dest path> -o [open directly in browser]
+visa -s <presentation file> -d <dest path> -o [open directly in default browser]
 
-The destination path is where the generated html files will be placed and any
-static files defined in the presentation file will be copied to.
+The destination path is where the generated html files will be generated and any
+static files defined in the presentation file will be copied into.
 
 example:
 cd ./my_project
@@ -69,12 +69,13 @@ mkdir -p presentation
 visa -s presentation.txt -d ./presentation -o
 ```
   
-**Example presentation file.** You can choose any file extension you like for the
+### Example presentation file  
+You can choose any file extension you like for the
 presentation file - my own preference is .txt. The syntax and workflow is explained
 within the example itself. The document is parsed top-down, meaning that the
 first slide is on top and the last is at the bottom.  
   
-The following example file covers all of this programs functionality, what you
+The following example file covers all of this programs functionality; what you
 see is what you get!  
   
 Blocks:  
@@ -102,6 +103,7 @@ s {
     This is the second slide with a neat picture.
     All images are copied into a "/static" folder
     within the destination directory at generation.
+    The path to an image can be either relative or absolute.
     img(images/IMG_4354.png)
 }
 
