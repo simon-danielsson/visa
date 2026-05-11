@@ -17,7 +17,7 @@
 
 ## Info
   
-visa generates html slide presentations from a single text file which can then be viewed in the browser, using left and right arrow keys for navigation.  
+visa generates html slide presentations from a single text file which can then be viewed in the browser, and navigated using left and right arrow keys.  
   
 ### Features
 + Image support  
@@ -29,9 +29,8 @@ visa generates html slide presentations from a single text file which can then b
 ### Why does this exist?  
 + Since this program only outputs raw html, its presentations are extremely portable between computers. The only software needed to run a presentation is a web-browser with JavaScript support.
 + Writing presentations in visa is quicker than traditional presentation software.
-+ The benefit of running presentations in the browser is that you can make use of
-  the browsers built-in features for quite a few things, such as zoom-in/out,
-  fullscreen and fonts.
++ The benefit of running presentations in the browser is that you can make use of the browsers built-in features for quite a few things, such as zoom-in/out, fullscreen and fonts.
++ visa intentionally removes manual layouts and positioning of text/images. The program formats slides dynamically, so that you can focus on writing content instead of arranging elements.
   
 > [!IMPORTANT]  
 > Only support for unix systems.
@@ -58,7 +57,9 @@ cenv release
 ## Usage
   
 ``` terminal
-visa -s <presentation file> -d <dest path> -o [open directly in default browser]
+visa -s <presentation file> -d <dest path> [-o] 
+
+-o: open directly in default browser
 
 The destination path is where the generated html files will be generated and any
 static files defined in the presentation file will be copied into.
@@ -107,8 +108,8 @@ s {
     img(images/IMG_4354.png)
 }
 
-Any text that's not inside of a block is ignored,
-so you can type any extra notes or comments between them.
+Any text that's not inside of a block is ignored. This makes writing comments
+and personal notes easy and ergonomic.
 
 o {
     h1 : #ff0000
