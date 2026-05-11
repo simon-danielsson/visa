@@ -27,7 +27,7 @@ visa generates html slide presentations from a single text file which can then b
 + Readable syntax  
   
 ### Why does this exist?  
-+ Since this program only outputs raw html, its presentations are extremely portable between computers. The only software needed to run a presentation is a web-browser, which all computers have.
++ Since this program only outputs raw html, its presentations are extremely portable between computers. The only software needed to run a presentation is a web-browser with JavaScript support.
 + Writing presentations in visa is quicker than traditional presentation software.
 + The benefit of running presentations in the browser is that you can make use of
   the browsers built-in features for quite a few things, such as zoom-in/out,
