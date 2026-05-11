@@ -92,6 +92,9 @@ s {
     img(images/IMG_4354.png)
 }
 
+Any text that's not inside of a block is ignored,
+so you can type any extra notes or comments between them.
+
 o {
     h1 : #ff0000
 }
