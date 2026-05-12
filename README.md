@@ -20,12 +20,11 @@
 visa is not a PowerPoint replacement or a Markdown presentation tool. It is a small plain-text format for writing structured slide decks that export to a portable HTML file.  
   
 ### Features
-+ Image support  
-+ Slides are navigated using left/right arrow keys  
 + Plain-text presentation writing  
-+ Browser-based slideshow navigation  
 + Static HTML output  
-+ Readable syntax  
++ Image support  
++ Left/right arrow key navigation  
++ Intuitive syntax  
   
 ### Why does this exist?  
 + Since this program only outputs raw html, its presentations are extremely portable between computers. The only software needed to run a presentation is a web-browser with JavaScript support.
