@@ -17,10 +17,11 @@
 
 ## Info
   
-visa generates html slide presentations from a single text file which can then be viewed in the browser, and navigated using left and right arrow keys.  
+visa is not a PowerPoint replacement or a Markdown presentation tool. It is a small plain-text format for writing structured slide decks that export to a portable HTML file.  
   
 ### Features
 + Image support  
++ Slides are navigated using left/right arrow keys  
 + Plain-text presentation writing  
 + Browser-based slideshow navigation  
 + Static HTML output  
@@ -29,7 +30,7 @@ visa generates html slide presentations from a single text file which can then b
 ### Why does this exist?  
 + Since this program only outputs raw html, its presentations are extremely portable between computers. The only software needed to run a presentation is a web-browser with JavaScript support.
 + Writing presentations in visa is quicker than traditional presentation software.
-+ The benefit of running presentations in the browser is that you can make use of the browsers built-in features for quite a few things, such as zoom-in/out, fullscreen and fonts.
++ The benefit of running presentations in the browser is that you can make use of the browsers built-in features for quite a few things, such as zoom-in/out, fullscreen and fonts. In your presentations you might also want to cite a website or play a youtube video, and in these cases visa is also convenient since you don't have to switch programs in the middle of a presentation.
 + visa intentionally removes manual layouts and positioning of text/images. The program formats slides dynamically, so that you can focus on writing content instead of arranging elements.
   
 > [!IMPORTANT]  
