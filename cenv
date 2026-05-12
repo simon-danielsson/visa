@@ -133,11 +133,6 @@ build_release() {
     # "$release_dir/$bin_name"
 }
 
-doc() {
-    mkdir -p ./tools/cdok/gen
-    ./tools/cdok/cdok -s ./src -d ./tools/cdok/gen -o
-}
-
 update_header_only_lib() {
     lib_name="$1"; lib_path="$2"; lib_repo_raw="$3"; root=$(pwd)
     cd "$lib_path"
@@ -157,21 +152,6 @@ update_header_only_lib() {
 }
 
 update() {
-    # update cdok
-    cd "$root/tools"
-    rm -rf cdok
-    git clone https://github.com/simon-danielsson/cdok
-    $root/tools/cdok/run release
-    mv "$root/tools/cdok/build/release/cdok" "$root/tools/main"
-    cd $root/tools
-    zip -r cdok.zip cdok
-    rm -rf cdok
-    mkdir -p cdok
-    mv main ./cdok/cdok
-    mv cdok.zip ./cdok/cdok-src_$current_date.zip
-    printf "\n${col_scs}'cdok' was updated successfully!${CR}\n"
-    cd $root
-
     update_header_only_lib "ana.h" "./src/libs" "https://raw.githubusercontent.com/simon-danielsson/ana.h/refs/heads/main/ana.h"
     update_header_only_lib "nob.h" "./tools/nob" "https://raw.githubusercontent.com/tsoding/nob.h/refs/heads/main/nob.h"
 }
@@ -207,10 +187,6 @@ help() {
 
     printf "\n"
 
-    printf "${col_cmd}cenv ${col_subc}doc${CR}\n"
-    printf "│ auto-generate docs from './src' and open in browser\n"
-    printf "╰ this command is still in the experimental stage\n"
-
     printf "${col_cmd}cenv ${col_subc}update${CR}\n"
     printf "│ update bundled tools and libraries from their upstream git sources\n"
     printf "╰ user-added dependencies are safely ignored\n"
@@ -240,9 +216,6 @@ else
       ;;
     help)
       help
-      ;;
-    doc)
-      doc
       ;;
     tidy)
       printf "\n${col_flag}The following files will be found and cleaned:\n"

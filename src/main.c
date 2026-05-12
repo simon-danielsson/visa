@@ -1,6 +1,5 @@
-//! main entry point of program
 #define ANALIB_IMPLEMENTATION
-#include "env.h"
+#include "main.h"
 #include "gen/gen.h"
 #include "utils.h"
 
@@ -47,15 +46,14 @@ void launch(char *src_file, char *dest_dir, bool doc_open) {
     }
 }
 
-//! main entry point
-int main(int argc, char *argv[]) {
+i32 main(i32 argc, char *argv[]) {
     char *src_file = NULL;
     char *dest_dir = NULL;
-    int open = 0;
+    i32 open = 0;
 
     char *err_msg = "visa -s <src_file> -d <dest_dir> [-o: open in browser]\n";
 
-    int opt;
+    i32 opt;
 
     while ((opt = getopt(argc, argv, "s:d:o")) != -1) {
         switch (opt) {

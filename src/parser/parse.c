@@ -1,6 +1,4 @@
-//! parse config file
-
-#include "../env.h"
+#include "../main.h"
 #include "../utils.h"
 
 #define BUF 512
@@ -28,9 +26,9 @@ typedef struct {
 } Line;
 
 typedef struct {
-    int number;
+    i32 number;
     Line *lines;
-    size_t lines_count;
+    usize lines_count;
     ColorHex colors;
 } Slide;
 
@@ -57,7 +55,7 @@ typedef struct {
     bool inside_options;
     bool inside_slide;
     Slide *slides;
-    size_t slide_count;
+    usize slide_count;
     ColorHex colors;
 } VisaParser;
 
@@ -87,9 +85,9 @@ void VisaParser_init(VisaParser *vp) {
 
 static void VisaParser_print(VisaParser *vp) {
     printf("\n");
-    for (size_t i = 0; i < vp->slide_count; i++) {
+    for (usize i = 0; i < vp->slide_count; i++) {
         printf("SLIDE %d\n", vp->slides[i].number);
-        for (size_t j = 0; j < vp->slides[i].lines_count; j++) {
+        for (usize j = 0; j < vp->slides[i].lines_count; j++) {
             printf("%s\n", vp->slides[i].lines[j].content);
         }
     }
@@ -97,7 +95,7 @@ static void VisaParser_print(VisaParser *vp) {
 
 void parse(VisaParser *vp, FILE *file) {
     char line[BUF];
-    int i = 0;
+    i32 i = 0;
 
     Slide tmp_s = {0};
     Slide_init(&tmp_s);

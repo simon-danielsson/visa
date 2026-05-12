@@ -1,14 +1,14 @@
-#include "../env.h"
+#include "../main.h"
 #include "../parser/parse.h"
 #include "../utils.h"
 #include "static.h"
 
-char *append_to_path(char *path, int to_append) {
+char *append_to_path(char *path, i32 to_append) {
     char to_append_as_str[64];
     snprintf(to_append_as_str, sizeof(to_append_as_str), "%d", to_append);
 
-    size_t ext = strlen(".html");
-    size_t output_size = strlen(path) + strlen(to_append_as_str) + 1 + 2 + ext;
+    usize ext = strlen(".html");
+    usize output_size = strlen(path) + strlen(to_append_as_str) + 1 + 2 + ext;
     char *output = (char *)malloc(sizeof(char) * output_size);
 
     strcpy(output, path);
@@ -21,7 +21,7 @@ char *append_to_path(char *path, int to_append) {
 
 void gen(VisaParser *vp, char *dest_dir) {
 
-    for (size_t i = 0; i < vp->slide_count; i++) {
+    for (usize i = 0; i < vp->slide_count; i++) {
         char *file_path = append_to_path(dest_dir, vp->slides[i].number);
         FILE *fp = fopen(file_path, "w");
 
@@ -37,7 +37,7 @@ void gen(VisaParser *vp, char *dest_dir) {
         fprintf(fp, "<body>\n");
         // content
         fprintf(fp, "<main class=\"screen\">\n");
-        for (size_t j = 0; j < vp->slides[i].lines_count; j++) {
+        for (usize j = 0; j < vp->slides[i].lines_count; j++) {
             switch (vp->slides[i].lines[j].line_type) {
                 case H1:
                     fprintf(fp, "<h1>%s</h1>\n", vp->slides[i].lines[j].content);
@@ -81,9 +81,9 @@ void gen(VisaParser *vp, char *dest_dir) {
 
 static void VisaParser_print(VisaParser *vp) {
     printf("\n");
-    for (size_t i = 0; i < vp->slide_count; i++) {
+    for (usize i = 0; i < vp->slide_count; i++) {
         printf("SLIDE %d\n", vp->slides[i].number);
-        for (size_t j = 0; j < vp->slides[i].lines_count; j++) {
+        for (usize j = 0; j < vp->slides[i].lines_count; j++) {
             printf("%s\n", vp->slides[i].lines[j].content);
         }
     }

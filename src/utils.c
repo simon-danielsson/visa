@@ -1,14 +1,15 @@
-
-
-#include "env.h"
+#ifndef UTILS_H
+#define UTILS_H
+#include "main.h"
 #include <stdio.h>
+
 char *get_hex_from_line(char *line) {
     char buf[512];
     buf[0] = '\0';
     char *p;
     p = line;
     bool hex_found = false;
-    int hex_counter = 0;
+    i32 hex_counter = 0;
     while (*p != '\0') {
         if (*p == '#' || hex_found) {
             hex_found = true;
@@ -53,3 +54,4 @@ char *get_text_from_header_line(char *line) {
     }
     return NULL;
 }
+#endif
