@@ -3,12 +3,14 @@
 
 #define BUF 512
 
-/// content type of line
+// content type of line
 typedef enum {
     H1,
     H2,
+    A,
     P,
     IMG,
+    LIST,
 } LineContentType;
 
 /// colors
@@ -127,6 +129,16 @@ void parse(VisaParser *vp, FILE *file) {
             } else if (al_starts_with_no_w(line, "h2(")) {
                 Slide_push_line(&tmp_s,
                         &(Line){.line_type = H2,
+                        .content = get_text_from_header_line(line)});
+
+            } else if (al_starts_with_no_w(line, "a(")) {
+                Slide_push_line(&tmp_s,
+                        &(Line){.line_type = A,
+                        .content = get_text_from_header_line(line)});
+
+            } else if (al_starts_with_no_w(line, "list(")) {
+                Slide_push_line(&tmp_s,
+                        &(Line){.line_type = LIST,
                         .content = get_text_from_header_line(line)});
 
             } else if (al_starts_with_no_w(line, "img(")) {

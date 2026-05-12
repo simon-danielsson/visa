@@ -115,7 +115,16 @@ static const char header[] =
 "  width:70%;\n"
 "}\n"
 
-"p {\n"
+"ul {\n"
+"  display: inline-block;\n"
+"  list-style-type: circle;\n"
+"  text-align: left;\n"
+"  margin: 1rem auto;\n"
+"  padding-left: 1.5rem;\n"
+"  font-size: clamp(1.5rem, 4vw, 4rem);\n"
+"}\n"
+
+"p,a {\n"
 "  margin: 2rem;\n"
 "  font-size: clamp(1.5rem, 4vw, 4rem);\n"
 "  width:70%;\n"

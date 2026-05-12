@@ -3,6 +3,14 @@
 #include "../utils.h"
 #include "static.h"
 
+typedef struct {
+    char *name;
+    char *link;
+} Link;
+
+Link derive_namelink_from_a(const char *line);
+char **get_list_items(char *a_str);
+
 void gen(VisaParser *vp, char *dest_dir) {
 
     char file_path[BUF];
@@ -22,7 +30,7 @@ void gen(VisaParser *vp, char *dest_dir) {
                     vp->slides[i].colors.h1);
             fprintf(fp, "h2 {color: %s}\n", vp->slides[i].colors.h2);
 
-            fprintf(fp, "p {color: %s}\n", vp->slides[i].colors.p);
+            fprintf(fp, "p, ul, li {color: %s}\n", vp->slides[i].colors.p);
             fprintf(fp, "</style>");
         }
         { // content
@@ -30,12 +38,36 @@ void gen(VisaParser *vp, char *dest_dir) {
 
             for (usize j = 0; j < vp->slides[i].lines_count; j++) {
                 switch (vp->slides[i].lines[j].line_type) {
+                    case LIST: {
+                                   char **l = get_list_items(vp->slides[i].lines[j].content);
+                                   fprintf(fp, "<ul>");
+                                   if (l) {
+                                       int i;
+                                       for (i = 0; *(l + i); i++) {
+                                           fprintf(fp, "<li>%s</li>", *(l + i));
+                                           free(*(l + i));
+                                       }
+                                       printf("\n");
+                                       free(l);
+                                   }
+                                   fprintf(fp, "</ul>");
+                               }
+                    case A: {
+                                Link l = derive_namelink_from_a(vp->slides[i].lines[j].content);
+                                if (l.name && l.link) {
+                                    fprintf(fp, "<a href=\"%s\" target=\"_blank\">%s</a>", l.link,
+                                            l.name);
+                                    free(l.name);
+                                    free(l.link);
+                                }
+                            }
+                            continue;
                     case H1:
-                        fprintf(fp, "<h1>%s</h1>\n", vp->slides[i].lines[j].content);
-                        continue;
+                            fprintf(fp, "<h1>%s</h1>\n", vp->slides[i].lines[j].content);
+                            continue;
                     case H2:
-                        fprintf(fp, "<h2>%s</h2>\n", vp->slides[i].lines[j].content);
-                        continue;
+                            fprintf(fp, "<h2>%s</h2>\n", vp->slides[i].lines[j].content);
+                            continue;
                     case IMG: {
                                   char cmd[BUF];
                                   snprintf(cmd, sizeof(cmd), "mkdir -p %s/static", dest_dir);
@@ -75,4 +107,76 @@ static void VisaParser_print(VisaParser *vp) {
             printf("%s\n", vp->slides[i].lines[j].content);
         }
     }
+}
+
+Link derive_namelink_from_a(const char *line) {
+    Link l = {0};
+
+    char *copy = malloc(strlen(line) + 1);
+    if (copy == NULL) {
+        ERROR("malloc failed");
+    }
+    strcpy(copy, line);
+
+    char *name = strtok(copy, ",");
+    char *link = strtok(NULL, "");
+
+    if (name == NULL || link == NULL) {
+        free(copy);
+        return l;
+    }
+
+    while (*link == ' ') {
+        link++;
+    }
+
+    l.name = malloc(strlen(name) + 1);
+    l.link = malloc(strlen(link) + 1);
+
+    if (l.name == NULL || l.link == NULL) {
+        free(l.name);
+        free(l.link);
+        free(copy);
+        ERROR("Parsing error while deriving name and link from link() statement");
+    }
+
+    strcpy(l.name, name);
+    strcpy(l.link, link);
+
+    free(copy);
+    return l;
+}
+
+char **get_list_items(char *a_str) {
+    const char a_delim = ',';
+    char **result = 0;
+    size_t count = 0;
+    char *tmp = a_str;
+    char *last_comma = 0;
+    char delim[2];
+    delim[0] = a_delim;
+    delim[1] = 0;
+    while (*tmp) {
+        if (a_delim == *tmp) {
+            count++;
+            last_comma = tmp;
+        }
+        tmp++;
+    }
+    count += last_comma < (a_str + strlen(a_str) - 1);
+    count++;
+    result = malloc(sizeof(char *) * count);
+    if (result) {
+        size_t idx = 0;
+        char *token = strtok(a_str, delim);
+        while (token) {
+            while (*token == ' ') {
+                token++;
+            }
+            *(result + idx++) = strdup(token);
+            token = strtok(0, delim);
+        }
+        *(result + idx) = 0;
+    }
+    return result;
 }

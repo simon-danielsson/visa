@@ -8,8 +8,10 @@
 typedef enum {
     H1,
     H2,
+    A,
     P,
     IMG,
+    LIST,
 } LineContentType;
 
 typedef struct {
