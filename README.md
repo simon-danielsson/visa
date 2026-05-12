@@ -116,11 +116,15 @@ o {
 }
 
 s {
-    h1(This is the second last slide)
+    h1(Here is another slide!)
     h2(For this slide I wanted a red header)
     This new h1 color will persist for upcoming
     slides if it isn't changed.
+    list(this is a list, here's the second item, this list is a bullet point list)
 }
+
+Right now, lists(), h1(), h2(), a() and img() items are only single-line, but I
+am planning to implement multiline parsing for list() items at least.
 
 o {
     h1 : #B9B9BC
@@ -128,12 +132,22 @@ o {
 }
 
 s {
-    h1(This is the last slide)
-    h2(Works like a charm)
-    I've been thinking about adding more
-    elements such as links and lists,
-    as well as extra options, such as font settings.
+    h1(This is the second last slide)
 }
+
+o {
+    h1 : #B9B9BC
+    h2 : #6E6E87
+    p  : #B9B9BC
+    bg : #25252d
+}
+s {
+    h1(This is the last slide)
+    h2(My favorite search engine!)
+    Here is a link to a duck that goes quack quack.
+    a(DuckDuckGo, https://duckduckgo.com/)
+}
+
 ```
   
 ---
