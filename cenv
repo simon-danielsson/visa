@@ -102,7 +102,7 @@ build_debug() {
     cd $root
     rm -rf gen
     "$debug_dir/$bin_name" -s test.txt -d gen
-    open -a "Min" ./gen/0.html
+    open -a "Min" ./gen/presentation.html
 }
 
 test_dir="$root/build/test"; mkdir -p $test_dir

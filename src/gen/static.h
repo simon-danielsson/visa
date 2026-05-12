@@ -1,44 +1,68 @@
 #ifndef STATIC_H
 #define STATIC_H
 
-static const char footer_part1[] = "<footer>\n"
-"<script>\n";
+static const char footer[] =
 
-static const char footer_part2[] =
-"document.addEventListener(\"keydown\", function (event) {\n"
-"  let match = window.location.pathname.match(/(\\d+)\\.html$/);\n"
-"  if (!match) return;\n"
+"<footer>\n"
+"<script>\n"
 
-"  let current = parseInt(match[1]);\n"
+"const slides = document.querySelectorAll(\".slide\");\n"
+"const activeStyle = document.getElementById(\"active-slide-style\");\n"
+"let currentSlide = 0;\n"
+"let isAnimating = false;\n"
+"function showSlide(index) {\n"
+"  if (isAnimating) return;\n"
+"  isAnimating = true;\n"
+" slides[currentSlide].classList.remove(\"active\");\n"
+" currentSlide = index;\n"
+" const slideStyle = slides[currentSlide].querySelector(\"style\");\n"
+" if (slideStyle) {\n"
+"   activeStyle.textContent = slideStyle.textContent;\n"
+" }\n"
+" slides[currentSlide].classList.add(\"active\");\n"
+" setTimeout(() => {\n"
+"   isAnimating = false;\n"
+" }, 200);\n"
+"}\n"
 
-"  if (event.key === \"ArrowLeft\" && current > 0) {\n"
-"window.location.href = (current - 1) + \".html?v=\" + Date.now();\n"
+"slides[0].classList.add(\"active\");\n"
+"const initialStyle = slides[0].querySelector(\"style\");\n"
+"if (initialStyle) {\n"
+"activeStyle.textContent = initialStyle.textContent;\n"
+"}\n"
+
+"document.addEventListener(\"keydown\", (event) => {\n"
+"  if (\n"
+"    event.key === \"ArrowRight\" &&\n"
+"    currentSlide < slides.length - 1\n"
+"  ) {\n"
+"    showSlide(currentSlide + 1);\n"
 "  }\n"
-"\n"
-"  if (event.key === \"ArrowRight\" && current < MAX_PAGE) {\n"
-"window.location.href = (current + 1) + \".html?v=\" + Date.now();\n"
+"  if (\n"
+"    event.key === \"ArrowLeft\" &&\n"
+"    currentSlide > 0\n"
+"  ) {\n"
+"    showSlide(currentSlide - 1);\n"
 "  }\n"
 "});\n"
+
 "</script>\n"
 "</footer>\n";
 
-static const char header_part1[] =
+static const char header[] =
 
 "<!DOCTYPE html>\n"
 "<html lang=\"sv\">\n"
 "<head>\n"
-"<style>\n";
+"<style>\n"
 
-static const char header_part2[] =
 "html,\n"
 "body {\n"
 "  margin: 0;\n"
 "  min-height: 100%;\n"
 "  font-family: Helvetica, Arial, sans-serif;\n"
-"  color: var(--c_h1);\n"
-"  background: var(--c_bg);\n"
 "}\n"
-"\n"
+
 "body {\n"
 "  min-height: 100vh;\n"
 "  display: grid;\n"
@@ -46,42 +70,64 @@ static const char header_part2[] =
 "  overflow: hidden;\n"
 "}\n"
 
-".screen {\n"
-// "  width: min(90vw, 1200px);\n"
+" .screen {\n"
+"  width: 100vw;\n"
+"  height: 100vh;\n"
+
+"  display: flex;\n"
+"  flex-direction: column;\n"
+
+"  justify-content: center; \n"
+"  align-items: center;     \n"
+
 "  text-align: center;\n"
-// "  padding: 5vw;\n"
 "}\n"
 
-"h1,\n"
-"h2,\n"
-" {\n"
-"  margin: 0;\n"
-"  padding: 0;\n"
-"  background: var(--c_bg);\n"
+".slide {\n"
+"  position: absolute;\n"
+"  inset: 0;\n"
+
+"  opacity: 0;\n"
+"  visibility: hidden;\n"
+
+"  transition:\n"
+"    opacity 0.15s ease-in-out,\n"
+"    visibility 0.15s ease-in-out;\n"
+
+"  pointer-events: none;\n"
 "}\n"
-"\n"
+
+".slide.active {\n"
+"  opacity: 1;\n"
+"  visibility: visible;\n"
+"  pointer-events: auto;\n"
+"}\n"
+
 "h1 {\n"
-"  color: var(--c_h1);\n"
-"  font-size: clamp(3rem, 10vw, 10rem);\n"
+"  font-size: clamp(1rem, 6vw, 6rem);\n"
+"  margin: 2rem;\n"
+"  width:70%;\n"
 "}\n"
-"\n"
+
 "h2 {\n"
-"  color: var(--c_h2);\n"
 "  font-size: clamp(2rem, 6vw, 6rem);\n"
+"  margin: 2rem;\n"
+"  width:70%;\n"
 "}\n"
-"\n"
+
 "p {\n"
-"  color: var(--c_p);\n"
+"  margin: 2rem;\n"
 "  font-size: clamp(1.5rem, 4vw, 4rem);\n"
+"  width:70%;\n"
 "}\n"
 "    img {\n"
 "  max-width: 90vw;\n"
-"  max-height: 50vh;   /* keeps it from pushing text out */\n"
+"  max-height: 50vh;   \n"
 "  object-fit: contain;\n"
 "  border-radius: 0.5rem;\n"
 "}\n"
-
 "</style>\n"
+"<style id=\"active-slide-style\"></style>\n"
 "</head>\n";
 
 #endif

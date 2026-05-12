@@ -40,7 +40,7 @@ void launch(char *src_file, char *dest_dir, bool doc_open) {
         ERROR("Unknown or non-unix platform detected\n");
 #endif
         char path[BUF * 2];
-        snprintf(path, sizeof(path), "%s/0.html", dest_dir);
+        snprintf(path, sizeof(path), "%s/presentation.html", dest_dir);
         strncat(cmd, path, BUF);
         system(cmd);
     }
