@@ -56,6 +56,8 @@ cenv release
   
 ## Usage
   
+### CLI
+    
 ``` terminal
 visa -s <presentation file> -d <dest path> [-o] 
 
@@ -70,6 +72,24 @@ mkdir -p presentation
 visa -s presentation.txt -d ./presentation -o
 ```
   
+### Syntax
+  
+``` terminal
+o {}: options  
+│ h1  : <hex_color>
+│ h2  : <hex_color>
+│ p   : <hex_color>
+│ img : <hex_color>
+
+s {}: slide  
+│ h1(<text>)
+│ h2(<text>)
+│ img(<path>)
+│ list(<text>, <text>, <text> ...)
+│ a(<name>, <link>)
+│ text [p]
+```
+  
 ### Example presentation file  
 You can choose any file extension you like for the
 presentation file - my own preference is .txt. The syntax and workflow is explained
@@ -79,9 +99,6 @@ first slide is on top and the last is at the bottom.
 The following example file covers all of this programs functionality; what you
 see is what you get!  
   
-Blocks:  
-- o {}: options  
-- s {}: slide  
   
 ``` txt
 o {
@@ -123,7 +140,7 @@ s {
     list(this is a list, here's the second item, this list is a bullet point list)
 }
 
-Right now, lists(), h1(), h2(), a() and img() items are only single-line, but I
+Right now, list(), h1(), h2(), a() and img() items are only single-line, but I
 am planning to implement multiline parsing for list() items at least.
 
 o {
