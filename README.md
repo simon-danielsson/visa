@@ -35,9 +35,6 @@ visa is not a PowerPoint replacement or a Markdown presentation tool. It is a sm
 > [!IMPORTANT]  
 > Only support for unix systems.
   
-visa relies on [nob.h](https://github.com/tsoding/nob.h) (a header-only
-build-system) for compilation.  
-  
 <div id="install"></div>
   
 ## Install
@@ -45,7 +42,7 @@ build-system) for compilation.
 ``` terminal
 git clone https://github.com/simon-danielsson/visa.git
 cd visa
-cenv release
+run release
 
 # Now you have an executable ready to run within ./build/release/
 # Add this to a binary path or bash alias
