@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<style>
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+ .screen {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.15s ease-in-out,
+    visibility 0.15s ease-in-out;
+
+  pointer-events: none;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+h1 {
+  font-size: clamp(1rem, 6vw, 6rem);
+  margin: 2rem;
+  width:70%;
+}
+
+h2 {
+  font-size: clamp(2rem, 6vw, 6rem);
+  margin: 2rem;
+  width:70%;
+}
+
+ul {
+  display: inline-block;
+  list-style-type: circle;
+  text-align: left;
+  margin: 1rem auto;
+  padding-left: 1.5rem;
+  font-size: clamp(1.5rem, 4vw, 4rem);
+}
+
+p,a {
+  margin: 2rem;
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  width:70%;
+}
+    img {
+  max-width: 90vw;
+  max-height: 50vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+</style>
+<style id="active-slide-style"></style>
+</head>

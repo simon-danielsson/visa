@@ -1,0 +1,45 @@
+<footer>\n"
+<script>
+
+const slides = document.querySelectorAll(".slide");
+const activeStyle = document.getElementById("active-slide-style");
+let currentSlide = 0;
+let isAnimating = false;
+function showSlide(index) {
+  if (isAnimating) return;
+  isAnimating = true;
+ slides[currentSlide].classList.remove("active");
+ currentSlide = index;
+ const slideStyle = slides[currentSlide].querySelector("style");
+ if (slideStyle) {
+   activeStyle.textContent = slideStyle.textContent;
+ }
+ slides[currentSlide].classList.add("active");
+ setTimeout(() => {
+   isAnimating = false;
+ }, 200);
+}
+
+slides[0].classList.add("active");
+const initialStyle = slides[0].querySelector("style");
+if (initialStyle) {
+activeStyle.textContent = initialStyle.textContent;
+}
+
+document.addEventListener("keydown", (event) => {
+  if (
+    event.key === "ArrowRight" &&
+    currentSlide < slides.length - 1
+  ) {
+    showSlide(currentSlide + 1);
+  }
+  if (
+    event.key === "ArrowLeft" &&
+    currentSlide > 0
+  ) {
+    showSlide(currentSlide - 1);
+  }
+});
+
+</script>
+</footer>
